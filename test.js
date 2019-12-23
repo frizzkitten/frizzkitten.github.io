@@ -436,7 +436,7 @@ function find_best_cat() {
     console.log("scored_cats: ", scored_cats);
 
     window.location.pathname = "/ranked-cats.html";
-    const container_element = document.findElementById("ranked-cats");
+    const container_element = document.getElementById("ranked-cats");
 
     let top_cat_img = document.createElement("img");
     img.src = scored_cats[0].image;
