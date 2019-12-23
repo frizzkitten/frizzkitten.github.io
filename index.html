@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>Pick yo' kitty!</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="./test.js"></script>
+    </head>
+    <body>
+        <h1>Kittypicker 2000</h1>
+        <div id="questions">
+            <div class="question">
+                <h3>Will this be a solo cat or will other cats be around?</h3>
+                <input type="radio" name="good_with_other_cats" value="false" />
+                Solo kitty <br />
+                <input type="radio" name="good_with_other_cats" value="true" />
+                I already have other cats (or will be getting more than one)<br />
+            </div>
+            <div class="question">
+                <h3>Would you prefer a kitten or an adult kitcat?</h3>
+                <input type="radio" name="kitten" value="true" /> Kitten!<br />
+                <input type="radio" name="kitten" value="false" /> Adult!<br />
+                <input type="radio" name="kitten" value="either" /> Don't
+                care!<br />
+            </div>
+            <div class="question">
+                <h3>How would you feel about a cute lil disabled kitty?</h3>
+                <input type="radio" name="disabled" value="true" /> I want a
+                disabled kitty please!<br />
+                <input type="radio" name="disabled" value="false" /> I'd prefer
+                a fully able kitcat<br />
+                <input type="radio" name="disabled" value="either" /> I'm cool
+                with any level of ability<br />
+            </div>
+            <div class="question">
+                <h3>Would you prefer a luscious mane or short hair?</h3>
+                <input type="radio" name="long_hair" value="true" /> Long
+                hair!<br />
+                <input type="radio" name="long_hair" value="false" /> Short
+                hair!<br />
+                <input type="radio" name="long_hair" value="either" /> Any hair
+                length!<br />
+            </div>
+            <div class="question">
+                <h3>Do you have a sex preference?</h3>
+                <input type="radio" name="male" value="true" /> Male!<br />
+                <input type="radio" name="male" value="false" /> Female!<br />
+                <input type="radio" name="male" value="either" /> I don't
+                care!<br />
+            </div>
+            <div class="question">
+                <h3>What energy level would you prefer?</h3>
+                <input type="radio" name="energetic" value="true" /> Fully
+                charged and ready to play!<br />
+                <input type="radio" name="energetic" value="false" /> Laid back
+                and usually horizontal<br />
+                <input type="radio" name="energetic" value="either" /> Any
+                adrenaline level is perfect for me<br />
+            </div>
+            <div class="question">
+                <h3>Will you have small children around?</h3>
+                <input type="radio" name="good_with_kids" value="true" /> Yes,
+                the cat will interact with lil 'uns<br />
+                <input type="radio" name="good_with_kids" value="false" /> No,
+                generally only adults and big kids<br />
+            </div>
+            <div class="question">
+                <h3>Do you want a cuddler or an independent kitty?</h3>
+                <input type="radio" name="cuddler" value="true" /> All the
+                cuddles, please<br />
+                <input type="radio" name="cuddler" value="false" /> I want a cat
+                who doesn't need much attention<br />
+                <input type="radio" name="cuddler" value="either" /> I have no
+                cuddle preference<br />
+            </div>
+        </div>
+        <button onclick="find_best_cat()">Find the best kitty for me!</button>
+    </body>
+</html>
