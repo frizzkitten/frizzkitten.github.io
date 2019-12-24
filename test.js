@@ -204,7 +204,7 @@ const cats = [
             male: true,
             energetic: false,
             good_with_kids: true,
-            cuddler: false
+            cuddler: true
         },
         description:
             "Sunny is a sun-lover and is always down for a good pat on his spotted head."
@@ -404,18 +404,36 @@ const num_qualities = qualities.length;
 const value_mapper = { true: true, false: false, either: "either" };
 
 function find_best_cat() {
-    console.log("finding best cat!");
+    // get all the data from the form
+    const wanted_qualities = get_wanted_qualities();
 
-    const wanted_qualities = qualities.map(quality => {
+    // rank the cats
+    const scored_cats = score_cats(wanted_qualities);
+
+    console.log("wanted_qualities: ", wanted_qualities);
+    console.log("scored_cats: ", scored_cats);
+
+    // hide all the current stuff
+    hide_form();
+
+    // show all the new stuff
+    show_scored_cats(scored_cats);
+}
+
+// gets the data from the form
+function get_wanted_qualities() {
+    return qualities.map(quality => {
         const string_value = $(`input[name=${quality}]:checked`).val();
         return {
             quality,
             value: value_mapper[string_value]
         };
     });
-    console.log("wanted_qualities: ", wanted_qualities);
+}
 
-    const scored_cats = cats
+// get a ranked list of the cats in order of how well they fit the description
+function score_cats(wanted_qualities) {
+    return cats
         .map(cat => {
             const quality_mismatches = wanted_qualities
                 .filter(
@@ -432,13 +450,34 @@ function find_best_cat() {
             };
         })
         .sort((c1, c2) => c2.score - c1.score);
+}
 
-    console.log("scored_cats: ", scored_cats);
+function hide_form() {
+    $("#questions").hide();
+}
 
-    // window.location.pathname = "/ranked-cats.html";
-    const container_element = document.getElementById("ranked-cats");
+// show all the ranked cats
+const default_image = "./stretchy-cat.jpg";
+function show_scored_cats(scored_cats) {
+    const container = document.getElementById("ranked-cats");
 
-    let top_cat_img = document.createElement("img");
-    top_cat_img.src = scored_cats[0].image;
-    container_element.appendChild(top_cat_img);
+    // go through every scored cat
+    scored_cats.forEach(cat => {
+        let cat_container = addElement(container, "div", { className: "cat" });
+
+        // add the image of the cat
+        addElement(cat_container, "img", {
+            src: cat.image || default_image,
+            className: "best-cat-img"
+        });
+    });
+}
+
+function addElement(container_element, type, options) {
+    let new_element = document.createElement(type);
+    Object.keys(options).forEach(
+        option_name => (new_element[option_name] = options[option_name])
+    );
+    container_element.appendChild(new_element);
+    return new_element;
 }
