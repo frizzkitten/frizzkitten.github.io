@@ -470,6 +470,10 @@ function show_scored_cats(scored_cats) {
             src: cat.image || default_image,
             className: "best-cat-img"
         });
+
+        // add the name and description of the cat
+        addElement(cat_container, "h4", { innerText: cat.name });
+        addElement(cat_container, "p", { innerText: cat.description });
     });
 }
 

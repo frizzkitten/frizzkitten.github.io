@@ -2,11 +2,21 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8" />
-        <title>Pick yo' kitty!</title>
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="./test.js"></script>
         <link rel="icon" href="./favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="./style.css" />
+        <title>Pick yo' kitty!</title>
     </head>
     <body>
         <h1>Kittypicker 2000</h1>
@@ -75,7 +85,11 @@
                 <input type="radio" name="cuddler" value="either" /> I have no
                 cuddle preference<br />
             </div>
-            <button onclick="find_best_cat()">
+            <button
+                type="button"
+                class="btn btn-primary"
+                onclick="find_best_cat()"
+            >
                 Find the best kitty for me!
             </button>
         </div>
