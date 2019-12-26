@@ -10,6 +10,71 @@ const questions = [
                 value: "true"
             }
         ]
+    },
+    {
+        name: "kitten",
+        question: "Would you prefer a kitten or an adult kitcat?",
+        answers: [
+            { text: "Kitten!", value: "true" },
+            { text: "Adult!", value: "false" },
+            { text: "Don't care!", value: "either" }
+        ]
+    },
+    {
+        name: "disabled",
+        question: "How would you feel about a cute lil disabled kitty?",
+        answers: [
+            { text: "I want a disabled kitty please!", value: "true" },
+            { text: "I'd prefer a fully able kitcat", value: "false" },
+            { text: "I'm cool with any level of ability", value: "either" }
+        ]
+    },
+    {
+        name: "long_hair",
+        question: "Would you prefer a luscious mane or short hair?",
+        answers: [
+            { text: "Long hair!", value: "true" },
+            { text: "Short hair!", value: "false" },
+            { text: "Any hair length!", value: "either" }
+        ]
+    },
+    {
+        name: "male",
+        question: "Do you have a sex preference?",
+        answers: [
+            { text: "Male!", value: "true" },
+            { text: "Female!", value: "false" },
+            { text: "I don't care!", value: "either" }
+        ]
+    },
+    {
+        name: "energetic",
+        question: "What energy level would you prefer?",
+        answers: [
+            { text: "Fully charged and ready to play!", value: "true" },
+            { text: "Laid back and usually horizontal", value: "false" },
+            { text: "Any adrenaline level is perfect for me", value: "either" }
+        ]
+    },
+    {
+        name: "good_with_kids",
+        question: "Will you have small children around?",
+        answers: [
+            { text: "Yes, the cat will interact with lil 'uns", value: "true" },
+            { text: "No, generally only adults and big kids", value: "false" }
+        ]
+    },
+    {
+        name: "cuddler",
+        question: "Do you want a cuddler or an independent kitty?",
+        answers: [
+            { text: "All the cuddles, please", value: "true" },
+            {
+                text: "I want a cat who doesn't need much attention",
+                value: "false"
+            },
+            { text: "I have no cuddle preference", value: "either" }
+        ]
     }
 ];
 
@@ -20,7 +85,7 @@ function add_questions() {
     // go through each question
     questions.forEach(question => {
         // add in the text of the question
-        add_element(container, "h3", { innerText: question.question });
+        add_element(container, "h4", { innerText: question.question });
 
         // add in all the answers
         question.answers.forEach((answer, answer_index) => {
