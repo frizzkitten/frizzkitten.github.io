@@ -1,3 +1,50 @@
+const questions = [
+    {
+        name: "good_with_other_cats",
+        question: "Will this be a solo cat or will other cats be around?",
+        answers: [
+            { text: "Solo kitty", value: "false" },
+            {
+                text:
+                    "I already have other cats (or will be getting more than one)",
+                value: "true"
+            }
+        ]
+    }
+];
+
+add_questions();
+function add_questions() {
+    const container = document.getElementById("questions");
+
+    // go through each question
+    questions.forEach(question => {
+        // add in the text of the question
+        add_element(container, "h3", { innerText: question.question });
+
+        // add in all the answers
+        question.answers.forEach((answer, answer_index) => {
+            const answer_id = question.name + answer_index;
+
+            let q_container = add_element(container, "div", {
+                className: "form-check"
+            });
+            add_element(q_container, "input", {
+                className: "form-check-input",
+                type: "radio",
+                name: question.name,
+                id: answer_id,
+                value: answer.value
+            });
+            add_element(q_container, "label", {
+                className: "form-check-label",
+                htmlFor: answer_id,
+                innerText: answer.text
+            });
+        });
+    });
+}
+
 const cats = [
     {
         name: "Robin",
@@ -453,7 +500,7 @@ function score_cats(wanted_qualities) {
 }
 
 function hide_form() {
-    $("#questions").hide();
+    $("#questions-area").hide();
 }
 
 // show all the ranked cats
@@ -463,21 +510,21 @@ function show_scored_cats(scored_cats) {
 
     // go through every scored cat
     scored_cats.forEach(cat => {
-        let cat_container = addElement(container, "div", { className: "cat" });
+        let cat_container = add_element(container, "div", { className: "cat" });
 
         // add the image of the cat
-        addElement(cat_container, "img", {
+        add_element(cat_container, "img", {
             src: cat.image || default_image,
             className: "best-cat-img"
         });
 
         // add the name and description of the cat
-        addElement(cat_container, "h4", { innerText: cat.name });
-        addElement(cat_container, "p", { innerText: cat.description });
+        add_element(cat_container, "h4", { innerText: cat.name });
+        add_element(cat_container, "p", { innerText: cat.description });
     });
 }
 
-function addElement(container_element, type, options) {
+function add_element(container_element, type, options) {
     let new_element = document.createElement(type);
     Object.keys(options).forEach(
         option_name => (new_element[option_name] = options[option_name])

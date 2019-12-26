@@ -13,15 +13,15 @@
             crossorigin="anonymous"
         />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="./test.js"></script>
         <link rel="icon" href="./favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="./style.css" />
         <title>Pick yo' kitty!</title>
     </head>
     <body>
         <h1>Kittypicker 2000</h1>
-        <div id="questions">
-            <div class="question">
+        <div id="questions-area">
+            <div id="questions">
+                <!-- <div class="question">
                 <h3>Will this be a solo cat or will other cats be around?</h3>
                 <input type="radio" name="good_with_other_cats" value="false" />
                 Solo kitty <br />
@@ -84,6 +84,7 @@
                 who doesn't need much attention<br />
                 <input type="radio" name="cuddler" value="either" /> I have no
                 cuddle preference<br />
+            </div> -->
             </div>
             <button
                 type="button"
@@ -94,5 +95,7 @@
             </button>
         </div>
         <div id="ranked-cats"></div>
+
+        <script src="./test.js"></script>
     </body>
 </html>
