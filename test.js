@@ -84,25 +84,33 @@ function add_questions() {
 
     // go through each question
     questions.forEach(question => {
+        // add a div for the question
+        let q_container = add_element(container, "div", {
+            className: "question"
+        });
+
         // add in the text of the question
-        add_element(container, "h4", { innerText: question.question });
+        add_element(q_container, "p", {
+            innerText: question.question,
+            className: "question-text"
+        });
 
         // add in all the answers
         question.answers.forEach((answer, answer_index) => {
             const answer_id = question.name + answer_index;
 
-            let q_container = add_element(container, "div", {
-                className: "form-check"
+            let a_container = add_element(q_container, "div", {
+                className: "form-check answer"
             });
-            add_element(q_container, "input", {
+            add_element(a_container, "input", {
                 className: "form-check-input",
                 type: "radio",
                 name: question.name,
                 id: answer_id,
                 value: answer.value
             });
-            add_element(q_container, "label", {
-                className: "form-check-label",
+            add_element(a_container, "label", {
+                className: "form-check-label answer-text",
                 htmlFor: answer_id,
                 innerText: answer.text
             });

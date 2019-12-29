@@ -18,19 +18,23 @@
         <title>Pick yo' kitty!</title>
     </head>
     <body>
+        <div class="top-bar"></div>
         <div class="container">
-            <h1>Kittypicker 2000</h1>
-            <div id="questions-area">
-                <div id="questions"></div>
-                <button
-                    type="button"
-                    class="btn btn-primary"
-                    onclick="find_best_cat()"
-                >
-                    Find the best kitty for me!
-                </button>
+            <div class="col-8 main-area">
+                <div class="decorative-bar"></div>
+                <h2>Kittypicker 2000</h2>
+                <div id="questions-area">
+                    <div id="questions"></div>
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        onclick="find_best_cat()"
+                    >
+                        Find the best kitty for me!
+                    </button>
+                </div>
+                <div id="ranked-cats"></div>
             </div>
-            <div id="ranked-cats"></div>
         </div>
 
         <script src="./test.js"></script>
