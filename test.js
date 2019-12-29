@@ -572,9 +572,12 @@ function score_cats(wanted_qualities) {
                             !!cat.qualities[quality_obj.quality]
                 )
                 .map(quality_obj => quality_obj.quality);
+
+            const score = num_qualities - quality_mismatches.length;
             return {
                 ...cat,
-                score: num_qualities - quality_mismatches.length,
+                score,
+                percent: score / num_qualities,
                 quality_mismatches
             };
         })
@@ -590,27 +593,55 @@ const default_image = "./stretchy-cat.jpg";
 function show_scored_cats(scored_cats) {
     const container = document.getElementById("ranked-cats");
 
-    // go through every scored cat
+    // go through every scored cat and add their info
     scored_cats.forEach(cat => {
+        const { percent, name, image } = cat;
+
         let cat_container = add_element(container, "div", { className: "cat" });
 
-        // add the image of the cat
+        // name
+        add_element(cat_container, "h4", { innerText: name });
+
+        // score percent
+        let score_container = add_element(cat_container, "p", {
+            className: "score_container"
+        });
+        add_element(score_container, "span", { innerText: "Score: " });
+        const r = Math.round(255 - percent * 255);
+        const g = Math.round(percent * 255);
+        add_element(
+            score_container,
+            "span",
+            { innerText: percent * 100 + "%" },
+            { color: `rgb(${r}, ${g}, 0)` }
+        );
+
+        // image
         add_element(cat_container, "img", {
-            src: cat.image || default_image,
+            src: image || default_image,
             className: "best-cat-img"
         });
 
-        // add the name and description of the cat
-        add_element(cat_container, "h4", { innerText: cat.name });
+        // description
         add_element(cat_container, "p", { innerText: cat.description });
     });
 }
 
-function add_element(container_element, type, options) {
+function add_element(container_element, type, options, style) {
     let new_element = document.createElement(type);
-    Object.keys(options).forEach(
-        option_name => (new_element[option_name] = options[option_name])
-    );
+
+    // add options
+    if (typeof options === "object")
+        Object.keys(options).forEach(
+            option_name => (new_element[option_name] = options[option_name])
+        );
+
+    // add style
+    if (typeof style === "object")
+        Object.keys(style).forEach(
+            style_key => (new_element.style[style_key] = style[style_key])
+        );
+
     container_element.appendChild(new_element);
     return new_element;
 }
