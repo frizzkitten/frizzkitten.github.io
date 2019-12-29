@@ -526,6 +526,8 @@ const value_mapper = { true: true, false: false, either: "either" };
 function find_best_cat() {
     // get all the data from the form
     const wanted_qualities = get_wanted_qualities();
+    if (!all_questions_answered(wanted_qualities))
+        return window.alert("Please answer all the questions!");
 
     // rank the cats
     const scored_cats = score_cats(wanted_qualities);
@@ -538,6 +540,13 @@ function find_best_cat() {
 
     // show all the new stuff
     show_scored_cats(scored_cats);
+}
+
+function all_questions_answered(wanted_qualities) {
+    return (
+        wanted_qualities.length === num_qualities &&
+        !wanted_qualities.some(quality => quality.value === undefined)
+    );
 }
 
 // gets the data from the form
