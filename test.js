@@ -554,6 +554,9 @@ function find_best_cat() {
 
     // show all the new stuff
     show_scored_cats(scored_cats);
+
+    // scroll to the top
+    window.scroll({ top: 0 });
 }
 
 function all_questions_answered(wanted_qualities) {
