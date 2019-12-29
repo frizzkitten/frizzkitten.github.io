@@ -519,6 +519,23 @@ const qualities = [
     "good_with_kids",
     "cuddler"
 ];
+const quality_descriptors = {
+    good_with_other_cats: {
+        true: "Social with other cats",
+        false: "Better as a solo cat"
+    },
+    kitten: { true: "Kitten", false: "Adult" },
+    disabled: {
+        true: "Disabled",
+        false: "Fully able",
+        undefined: "Fully able"
+    },
+    long_hair: { true: "Long hair", false: "Short hair" },
+    male: { true: "Male", false: "Female" },
+    energetic: { true: "Energetic", false: "Laid-back" },
+    good_with_kids: { true: "Kid-friendly", false: "Not ideal for kids" },
+    cuddler: { true: "Cuddler", false: "Not a big cuddler" }
+};
 const num_qualities = qualities.length;
 
 const value_mapper = { true: true, false: false, either: "either" };
@@ -531,9 +548,6 @@ function find_best_cat() {
 
     // rank the cats
     const scored_cats = score_cats(wanted_qualities);
-
-    console.log("wanted_qualities: ", wanted_qualities);
-    console.log("scored_cats: ", scored_cats);
 
     // hide all the current stuff
     hide_form();
@@ -564,21 +578,41 @@ function get_wanted_qualities() {
 function score_cats(wanted_qualities) {
     return cats
         .map(cat => {
-            const quality_mismatches = wanted_qualities
-                .filter(
-                    quality_obj =>
-                        quality_obj.value !== "either" &&
-                        !!quality_obj.value !==
-                            !!cat.qualities[quality_obj.quality]
-                )
-                .map(quality_obj => quality_obj.quality);
+            let quality_matches = [];
+            let quality_mismatches = [];
+
+            wanted_qualities.forEach(quality_obj => {
+                const quality = quality_obj.quality;
+                const cat_value = cat.qualities[quality];
+                if (
+                    quality_obj.value === "either" ||
+                    !!quality_obj.value === !!cat_value
+                ) {
+                    quality_matches.push({ quality, cat_value: !!cat_value });
+                } else {
+                    quality_mismatches.push({
+                        quality,
+                        cat_value: !!cat_value
+                    });
+                }
+            });
+
+            // const quality_mismatches = wanted_qualities
+            //     .filter(
+            //         quality_obj =>
+            //             quality_obj.value !== "either" &&
+            //             !!quality_obj.value !==
+            //                 !!cat.qualities[quality_obj.quality]
+            //     )
+            //     .map(quality_obj => quality_obj.quality);
 
             const score = num_qualities - quality_mismatches.length;
             return {
                 ...cat,
                 score,
                 percent: score / num_qualities,
-                quality_mismatches
+                quality_mismatches,
+                quality_matches
             };
         })
         .sort((c1, c2) => c2.score - c1.score);
@@ -600,11 +634,15 @@ function show_scored_cats(scored_cats) {
         let cat_container = add_element(container, "div", { className: "cat" });
 
         // name
-        add_element(cat_container, "h4", { innerText: name });
+        add_element(cat_container, "h4", {
+            innerText: name,
+            className: "center"
+        });
 
         // score percent
         let score_container = add_element(cat_container, "p", {
-            className: "score_container"
+            className: "score_container",
+            className: "center"
         });
         add_element(score_container, "span", { innerText: "Score: " });
         const r = Math.round(255 - percent * 255);
@@ -624,6 +662,31 @@ function show_scored_cats(scored_cats) {
 
         // description
         add_element(cat_container, "p", { innerText: cat.description });
+
+        // pros and cons
+        let pros_cons = add_element(cat_container, "div", {
+            className: "pros-and-cons container"
+        });
+        let row = add_element(pros_cons, "div", { className: "row" });
+        let pros = add_element(row, "div", { className: "col-6 center pros" });
+        let cons = add_element(row, "div", { className: "col-6 center cons" });
+
+        cat.quality_matches.forEach(quality_obj =>
+            add_element(pros, "p", {
+                innerText:
+                    quality_descriptors[quality_obj.quality][
+                        quality_obj.cat_value
+                    ]
+            })
+        );
+        cat.quality_mismatches.forEach(quality_obj =>
+            add_element(cons, "p", {
+                innerText:
+                    quality_descriptors[quality_obj.quality][
+                        quality_obj.cat_value
+                    ]
+            })
+        );
     });
 }
 

@@ -17,6 +17,10 @@ body {
     border-color: var(--dark-primary);
 }
 
+.center {
+    text-align: center;
+}
+
 .top-bar {
     background-color: var(--primary-color);
     height: 278px;
@@ -27,6 +31,9 @@ body {
 
 .container {
     z-index: 1;
+}
+
+.content {
     padding-top: 178px;
 }
 
@@ -63,21 +70,35 @@ body {
 }
 
 .cat {
-    text-align: center;
     padding: 20px 0;
+}
+.cat:not(:last-child) {
     border-bottom: 1px solid var(--background-color);
+}
+
+.best-cat-img {
+    height: 200px;
+    margin-bottom: 10px;
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+}
+
+.pros-and-cons p {
+    margin-bottom: 0;
+}
+.pros {
+    color: green;
+}
+.cons {
+    color: red;
 }
 
 @media (max-width: 660px) {
     .top-bar {
         height: 122px;
     }
-    .container {
+    .content {
         padding-top: 73px;
     }
-}
-
-.best-cat-img {
-    height: 200px;
-    margin-bottom: 10px;
 }
