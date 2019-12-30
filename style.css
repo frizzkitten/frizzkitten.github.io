@@ -121,7 +121,8 @@ body {
 }
 
 .pros-and-cons p {
-    margin-bottom: 0;
+    line-height: 1;
+    margin-bottom: 10px;
 }
 .pros {
     color: green;
