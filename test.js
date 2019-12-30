@@ -533,7 +533,7 @@ const quality_descriptors = {
     long_hair: { true: "Long hair", false: "Short hair" },
     male: { true: "Male", false: "Female" },
     energetic: { true: "Energetic", false: "Laid-back" },
-    good_with_kids: { true: "Kid-friendly", false: "Not ideal for kids" },
+    good_with_kids: { true: "Kid-friendly", false: "Best without kids" },
     cuddler: { true: "Cuddler", false: "Not a big cuddler" }
 };
 const num_qualities = qualities.length;
@@ -690,6 +690,17 @@ function show_scored_cats(scored_cats) {
                     ]
             })
         );
+
+        // adopt button
+        let btn_container = add_element(cat_container, "div", {
+            className: "center"
+        });
+        add_element(btn_container, "a", {
+            className: "btn btn-primary",
+            href: "https://www.letsbesmart-greece.org/adoption-form",
+            innerText: `Adopt ${name}!`,
+            target: "_blank"
+        });
     });
 }
 
