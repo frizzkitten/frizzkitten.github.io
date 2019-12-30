@@ -29,6 +29,42 @@ body {
     z-index: -1;
 }
 
+.social {
+    position: absolute;
+    padding: 20px 0 0 20px;
+}
+
+.social a {
+    margin: 10px;
+}
+
+.social img {
+    height: 30px;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.logo img {
+    height: 100px;
+}
+
+.learn-more {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: white;
+    font-size: 24px;
+}
+.learn-more:hover {
+    color: white;
+}
+
 .container {
     z-index: 1;
 }
@@ -100,5 +136,8 @@ body {
     }
     .content {
         padding-top: 73px;
+    }
+    .logo {
+        display: none;
     }
 }
