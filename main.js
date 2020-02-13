@@ -197,6 +197,15 @@ function parse_content(content) {
     else return content;
 }
 
+// removes cats of the wrong sex
+function gender_filter(cats, should_be_male) {
+    // if no preference is given, show all the cats
+    if (should_be_male === "either") return cats;
+
+    // otherwise, filter out the cats with the wrong bits
+    return cats.filter(cat => cat.qualities.male === should_be_male);
+}
+
 const value_mapper = { true: true, false: false, either: "either" };
 
 function find_best_cat() {
@@ -206,7 +215,12 @@ function find_best_cat() {
         return window.alert("Please answer all the questions!");
 
     // rank the cats
-    const scored_cats = score_cats(wanted_qualities);
+    let scored_cats = score_cats(wanted_qualities);
+
+    // remove cats of the wrong gender
+    const should_be_male = wanted_qualities.find(q => q.quality === "male")
+        .value;
+    scored_cats = gender_filter(scored_cats, should_be_male);
 
     // hide all the current stuff
     hide_form();
@@ -258,15 +272,6 @@ function score_cats(wanted_qualities) {
                     });
                 }
             });
-
-            // const quality_mismatches = wanted_qualities
-            //     .filter(
-            //         quality_obj =>
-            //             quality_obj.value !== "either" &&
-            //             !!quality_obj.value !==
-            //                 !!cat.qualities[quality_obj.quality]
-            //     )
-            //     .map(quality_obj => quality_obj.quality);
 
             const score = num_qualities - quality_mismatches.length;
             return {
