@@ -149,43 +149,28 @@ function add_questions() {
 let cats = [];
 
 function use_cat_data(data) {
-    const cells = data.feed.entry;
+    const rows = data.values;
     let headers = [];
 
-    let finding_headers = true;
-    let cell_index = 0;
-    let cell;
-    while (finding_headers) {
-        cell = cells[cell_index].gs$cell;
-        if (cell.row === "1") {
-            headers.push(cell.$t);
-            cell_index++;
-        } else finding_headers = false;
-    }
-
-    let row = cell.row;
-    let cat = { qualities: {} };
-    while (cell_index < cells.length) {
-        cell = cells[cell_index].gs$cell;
-        // if on a new row, it means the cat's info is fully filled out,
-        // so add the cat to the list and create a new cat
-        if (cell.row !== row) {
-            cats.push(cat);
-            cat = { qualities: {} };
+    rows.forEach((row, row_index) => {
+        // the first row is headers
+        if (row_index == 0) {
+            headers = row;
         }
 
-        row = cell.row;
-        let { col, $t: content } = cell;
-        col = parseInt(col, 10);
-        const quality = headers[col - 1];
-        if (qualities.includes(quality))
-            cat.qualities[quality] = parse_content(content);
-        else cat[quality] = parse_content(content);
+        // the rest of the rows are cats
+        else {
+            let cat = { qualities: {} };
+            row.forEach((cell_value, cell_index) => {
+                const quality = headers[cell_index];
+                if (qualities.includes(quality))
+                    cat.qualities[quality] = parse_content(cell_value);
+                else cat[quality] = parse_content(cell_value);
+            });
 
-        cell_index++;
-    }
-    // add the last cat
-    cats.push(cat);
+            cats.push(cat);
+        }
+    });
 }
 
 // parse content from a sheet cell
